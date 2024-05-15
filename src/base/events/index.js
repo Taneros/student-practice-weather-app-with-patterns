@@ -20,9 +20,7 @@ export class EventEmitter {
   }
 
   emit ( eventName, data ) {
-    console.log(`events/index.js - line: 23 ->> emit eventName, data`, eventName, data)
     this._events.forEach( ( subscribers, name ) => {
-      console.log(`events/index.js - line: 25 ->> subscribers, name`, subscribers, name)
       if (name === eventName) {
         subscribers.forEach(callback => callback(data));
       }
