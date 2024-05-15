@@ -6,8 +6,7 @@ export class Store extends Model{
 
   set(value) {
     this.weatherData = value
-    this.emitChanges( 'data:changed' )
-    this.emitChanges('*')
+    this.emitChanges()
   }
 
   get () {
@@ -21,6 +20,6 @@ export class Store extends Model{
   fetch = async (city) => {
     const data = await getWeatherData(city)
     this.set( data )
-    console.log('fetch', this.get());
+    console.log(`store/index.js - line: 23 ->> fetch`, this.get())
   }
 }

@@ -14,14 +14,12 @@ export class Page {
       const formData = new FormData( event.target )
       const cityName = formData.get( 'cityName' )
       
-      console.log(`components/Page.js - line: 17 ->> cityName`, cityName)
-      
       callback(cityName)
     });
   }
 
   updateWeather ( data ) {
-    console.log(`components/Page.js - line: 14 ->> data`, data)
+    console.log(`components/Page.js - line: 22 ->> data`, data)
     this.temperature.textContent = `Temperature: ${data.temperature}°C`;
     this.windDirection.textContent = `Wind Direction: ${data.windDirection}`;
     this.precipitation.textContent = `Precipitation: ${ data.precipitation }%`;

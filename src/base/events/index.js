@@ -1,45 +1,36 @@
 export class EventEmitter {
   constructor() {
-    this._events = new Map();
+    this._events = [];
   }
 
-  on(eventName, callback) {
-    if (!this._events.has(eventName)) {
-      this._events.set(eventName, new Set());
-    }
-    this._events.get(eventName).add(callback);
+  // class field
+  on = (listener) => {
+    this._events.push( listener )
+    return () => this.off(listener)
   }
 
-  off(eventName, callback) {
-    if (this._events.has(eventName)) {
-      this._events.get(eventName).delete(callback);
-      if (this._events.get(eventName).size === 0) {
-        this._events.delete(eventName);
-      }
-    }
+  off = ( listener ) => {
+    this.setEvents(this._events.filter(l => l !== listener))
   }
 
-  emit ( eventName, data ) {
-    console.log(`events/index.js - line: 23 ->> emit eventName, data`, eventName, data)
-    this._events.forEach( ( subscribers, name ) => {
-      console.log(`events/index.js - line: 25 ->> subscribers, name`, subscribers, name)
-      if (name === eventName) {
-        subscribers.forEach(callback => callback(data));
-      }
-    });
+  emit = ( data ) => {
+      this._events.forEach(callback => callback(data));
   }
 
-  onAll(callback) {
-    this.on('*', callback);
-  }
-
+  //this depends on call const first = useContext(second)
   offAll() {
-    this._events = new Map();
+    this._events = [];
   }
 
-  trigger(eventName, context = {}) {
-    return (event = {}) => {
-      this.emit(eventName, { ...event, ...context });
-    };
+  setEvents = (events) => {
+    this._events = events
+  }
+
+  trigger = ( listener, data = {} ) => {
+    const triggeredListener = this._events.find( l => l === listener )
+    if ( triggeredListener ) {
+      triggeredListener(data)
+    }
   }
 }
+

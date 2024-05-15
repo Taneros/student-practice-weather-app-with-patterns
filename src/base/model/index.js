@@ -3,7 +3,7 @@ export class Model {
     this.events = events
   }
 
-  emitChanges ( event, payload ) {
-    this.events.emit(event, payload ?? {})
+  emitChanges ( payload = {} ) {
+    this.events.emit(payload)
   }
 }
