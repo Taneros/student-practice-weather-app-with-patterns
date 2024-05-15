@@ -6,9 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="module" src="./app.js"></script>
   <title>Weather App</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div>My weather app</div>
-  <input id="city-input" value="Moscow"/>
+  <div class="container">
+    <h1>Weather App</h1>
+    <form id="form">
+      <label for="">Enter city name</label>
+      <input id="cityInput" value="" name="cityName"/>
+      <button type="submit">Find</button>
+    </form>
+    <div id="temperature"></div>
+    <div id="windDirection"></div>
+    <div id="precipitation"></div>
+  </div>
 </body>
 </html>

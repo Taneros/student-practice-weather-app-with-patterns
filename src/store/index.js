@@ -1,3 +1,4 @@
+import {Model} from '../base/model/index.js';
 import {getWeatherData} from '../services/getWeatherData.js';
 
 export class Store extends Model{
@@ -5,16 +6,21 @@ export class Store extends Model{
 
   set(value) {
     this.weatherData = value
-    this.emitChanges('data:changed')
+    this.emitChanges( 'data:changed' )
+    this.emitChanges('*')
   }
 
   get () {
     return this.weatherData
   }
 
-  async fetch () {
-    const data = await getWeatherData()
+  setCity = (value) => {
+    this.fetch(value)
+  }
+
+  fetch = async (city) => {
+    const data = await getWeatherData(city)
     this.set( data )
-    console.log('get', this.get());
+    console.log('fetch', this.get());
   }
 }

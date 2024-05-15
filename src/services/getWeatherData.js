@@ -1,8 +1,8 @@
-export const getWeatherData = () => {
+export const getWeatherData = (value = 'Moscow') => {
   return new Promise( ( res, rej ) => {
     setTimeout( () => {
       const data = {
-        cityName: 'Moscow',
+        cityName: value,
         temperature: 10,
         windDirection: 'NE',
         precipitation: 30
